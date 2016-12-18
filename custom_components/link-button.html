@@ -1,0 +1,26 @@
+<dom-module id="link-button">
+    <template>
+        <button on-tap="regularTap">[[name]]</button>
+
+
+    </template>
+    <script>
+        Polymer({
+            is: "link-button",
+            listeners: {
+                'tap': 'regularTap'
+            },
+            properties: {
+                link: {
+                    type: String,
+                    value: ""
+                }
+
+            },
+            regularTap: function (e) {
+                location.href=this.link;
+
+            }
+        })
+    </script>
+</dom-module>
