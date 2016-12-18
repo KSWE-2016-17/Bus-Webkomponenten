@@ -1,0 +1,24 @@
+{
+  "name": "bus-webkomponenten",
+  "homepage": "index.html",
+  "authors": [
+    "Sebastian Rose <srose@fh-bielefeld.de>"
+  ],
+  "description": "Anwendung für Busunternehmen, gebaut mit Webkomponenten durch Polymer",
+  "main": "index.html",
+  "keywords": [
+    "polymer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.7.1",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.10"
+  }
+}
