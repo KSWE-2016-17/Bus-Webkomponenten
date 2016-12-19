@@ -1,0 +1,92 @@
+<dom-module id="bus-tickets">
+    <link href="../bower_components/paper-slider/paper-slider.html" rel="import">
+    <link href="../bower_components/iron-label/iron-label.html" rel="import">
+
+    <template>
+
+        <paper-button raised onclick="modal.open()">Fahrgäste eintragen</paper-button>
+
+
+        <paper-dialog id="modal" modal>
+            <table>
+                <tr>
+                    <td>
+                        <label>Ticket</label>
+                    </td>
+                    <td></td>
+                    <td>
+                        <label>Anzahl</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iron-label for="adult">
+                            <span>Erwachsene</span><br>
+                        </iron-label>
+                    </td>
+                    <td><span>{{adultValue}}</span></td>
+                    <td>
+                        <paper-slider id="adult" value="{{adultValue}}" on-change="{{adultValue}}"></paper-slider>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iron-label for="reduced">
+                            <span>Ermäßigt</span><br>
+                        </iron-label>
+                    </td>
+                    <td><span>{{reducedValue}}</span></td>
+                    <td>
+                        <paper-slider id="reduced" value="{{reducedValue}}" on-change="{{reduceValue}}"></paper-slider>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iron-label for="monthly">
+                            <span>Monatsfahrkarte</span><br>
+                        </iron-label>
+                    </td>
+                    <td><span>{{monthlyValue}}</span></td>
+                    <td>
+                        <paper-slider id="monthly" value="{{monthlyValue}}" on-change="{{monthlyValue}}"></paper-slider>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iron-label for="student">
+                            <span>Schülerfahrkarte</span><br>
+                        </iron-label>
+                    </td>
+                    <td><span>{{studentValue}}</span></td>
+                    <td>
+                        <paper-slider id="student" value="{{studentValue}}" on-change="{{studentValue}}"></paper-slider>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iron-label for="special">
+                            <span>Sonderfahrkarte</span><br>
+                        </iron-label>
+                    </td>
+                    <td><span>{{specialValue}}</span></td>
+                    <td>
+                        <paper-slider id="special" value="{{specialValue}}" on-change="{{specialValue}}"></paper-slider>
+                    </td>
+                </tr>
+            </table>
+
+
+            <div class="buttons">
+                <paper-button dialog-confirm autofocus>Schließen</paper-button>
+            </div>
+
+        </paper-dialog>
+    </template>
+    <script>
+        Polymer({
+            is: "bus-tickets",
+            properties: {},
+
+        })
+    </script>
+</dom-module>
