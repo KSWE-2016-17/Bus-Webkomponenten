@@ -1,0 +1,29 @@
+<dom-module id="link-menu">
+    <template>
+        <template is="dom-repeat" items="{{links}}">
+            <link-button link="{{item.link}}" name="{{item.name}}"></link-button><br>
+        </template>
+    </template>
+    <script>
+        Polymer({
+            is: "link-menu",
+            properties: {
+                links: {
+                    type: Array,
+                    value: [
+                        {
+                            name: {
+                                type: String,
+                                value: ""
+                            },
+                            link: {
+                                type: String,
+                                value: ""
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+    </script>
+</dom-module>
