@@ -1,5 +1,14 @@
 <dom-module id="link-menu">
     <template>
+        <paper-button raised onclick="modal.open()">{{button_name}}</paper-button>
+        <paper-dialog id="modal" modal>
+            <template is="dom-repeat" items="{{links}}">
+                <link-button link="{{item.link}}" name="{{item.name}}"></link-button><br>
+            </template>
+            <div class="buttons">
+                <paper-button dialog-confirm autofocus>Schließen</paper-button>
+            </div>
+        </paper-dialog>
         <template is="dom-repeat" items="{{links}}">
             <link-button link="{{item.link}}" name="{{item.name}}"></link-button><br>
         </template>
@@ -22,6 +31,10 @@
                             }
                         }
                     ]
+                },
+                menu_name:{
+                    type: String,
+                    value: "Menu"
                 }
             }
         })

@@ -37,7 +37,7 @@ installieren wir nun die von Polymer bereitgestellen Iron- bzw. Paper-Elements.
 Komponenten:
 ---
 * link-button:
-    simpler Button um auf eine andere Webseite zu gelangen.
+    Erweiterung des Paper-Button um auf eine andere Webseite zu gelangen.
     
     Attribute:
     
@@ -51,14 +51,15 @@ Komponenten:
      ``
     
 * link-menu:
-    simples Menu mit link-buttons
+    Erweiterung des Paper-Dialog öffnet Menu, als Modal, mit Linkbutton 
     
     Attribute:
     
     + links: Array mit Elementen:
-        + name: Beschriftung des Button im Menu
-        + link: angestrebte Website des Button
-        
+        + name: Beschriftung der Button im Menu
+        + link: angestrebte Website der Button
+    + button-name: Beschriftung des Button
+    
     Implementierung:
          
     ``
