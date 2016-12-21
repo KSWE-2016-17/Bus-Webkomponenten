@@ -3,12 +3,9 @@
     <link href="../bower_components/iron-label/iron-label.html" rel="import">
     <link href="../bower_components/iron-form/iron-form.html" rel="import">
     <template>
-
-        <paper-button raised onclick="modal.open()">Fahrgäste eintragen</paper-button>
-
-
-        <paper-dialog id="modal" modal>
-            <form is="iron-form" method="get" action="/" id="basic">
+        <paper-button raised data-dialog="modal_b" onclick="modal_b.open()">Fahrgäste eintragen</paper-button>
+        <paper-dialog id="modal_b" modal>
+            <form is="iron-form" method="get" action="/{{url}}" id="basic">
                 <table>
                     <tr>
                         <td>
@@ -81,9 +78,9 @@
                 </table>
 
 
-                <paper-button raised onclick="_submit(event)">Submit</paper-button>
-                <paper-button raised onclick="_reset(event)">Reset</paper-button>
-                <paper-button dialog-confirm autofocus>Schließen</paper-button>
+                <paper-button raised onclick="_submit(event)">Akzeptieren</paper-button>
+                <paper-button raised onclick="_reset(event)">Abbrechen</paper-button>
+                <paper-button raised dialog-confirm autofocus>Schließen</paper-button>
                 <div class="output"></div>
             </form>
         </paper-dialog>
@@ -91,7 +88,12 @@
     <script>
         Polymer({
             is: "bus-tickets",
-            properties: {}
+            properties: {
+                url: {
+                    type: String,
+                    value: ""
+                }
+            }
 
         });
 

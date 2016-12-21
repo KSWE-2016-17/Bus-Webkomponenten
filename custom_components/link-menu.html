@@ -1,17 +1,21 @@
 <dom-module id="link-menu">
     <template>
-        <paper-button raised onclick="modal.open()">{{button_name}}</paper-button>
-        <paper-dialog id="modal" modal>
-            <template is="dom-repeat" items="{{links}}">
-                <link-button link="{{item.link}}" name="{{item.name}}"></link-button><br>
-            </template>
+        <paper-button raised data-dialog="modal_m" onclick="modal_m.open()">{{menu_name}}</paper-button>
+        <paper-dialog id="modal_m" modal>
+            <table>
+                <tr>
+                    <label><h2>{{menu_name}}:</h2></label>
+                </tr>
+                <template is="dom-repeat" items="{{links}}">
+                    <tr>
+                        <link-button link="{{item.link}}" name="{{item.name}}"></link-button>
+                    </tr>
+                </template>
+            </table>
             <div class="buttons">
-                <paper-button dialog-confirm autofocus>Schließen</paper-button>
+                <paper-button raised dialog-confirm autofocus>Schließen</paper-button>
             </div>
         </paper-dialog>
-        <template is="dom-repeat" items="{{links}}">
-            <link-button link="{{item.link}}" name="{{item.name}}"></link-button><br>
-        </template>
     </template>
     <script>
         Polymer({
@@ -32,7 +36,7 @@
                         }
                     ]
                 },
-                menu_name:{
+                menu_name: {
                     type: String,
                     value: "Menu"
                 }
