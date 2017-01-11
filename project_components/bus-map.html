@@ -1,0 +1,155 @@
+<dom-module id="bus-map">
+    <!-- Die Bus Map Komponente erzeugt eine Karte mittels Google Map auf der die Haltestellen eingezeichnet sind,
+    des weiteren werden die nächsten Haltestellen in einer Tabelle angezeigt und Anschlüsse andiesen können angezeigt
+    werden -->
+    <link href="../bower_components/google-map/google-map.html" rel="import">
+    <link rel="import" href="../bower_components/google-map/google-map-directions.html">
+    <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+    <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="../bower_components/paper-item/paper-item.html">
+    <link rel="import" href="../bower_components/paper-item/paper-icon-item.html">
+    <link rel="import" href="../bower_components/paper-input/paper-input.html">
+    <link rel="import" href="../bower_components/paper-card/paper-card.html">
+    <link rel="import" href="../bower_components/iron-icons/maps-icons.html">
+    <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+    <link href="bus-connection-dialog.html" rel="import">
+    <template>
+        <style>
+            google-map {
+                height: 600px;
+            }
+
+            paper-card {
+                position: absolute;
+                bottom: 25px;
+                left: 25px;
+                z-index: 1;
+            }
+
+            paper-tabs {
+                --paper-tabs-selection-bar-color: #0D47A1;
+                margin-top: 16px;
+            }
+
+            paper-tab {
+                --paper-tab-ink: #BBDEFB;
+            }
+
+            paper-tab iron-icon {
+                margin-right: 10px;
+            }
+
+            paper-tab.iron-selected {
+                background: rgb(66, 133, 244);
+                color: white;
+            }
+
+            table, th, td {
+                width: 100%;
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 15px;
+            }
+        </style>
+
+        <google-map map="{{map}}" latitude="52.2868131" longitude="8.9174381"
+                    api-key="AIzaSyA5Z-Awweej__K-FumvWHMTG4w3C1RePhA" disable-default-ui zoom="15">
+            <template is="dom-repeat" items="{{stations}}">
+                <google-map-marker latitude="{{item.lat}}" longitude="{{item.long}}"
+                                   title="{{item.station}}" draggable="false"></google-map-marker>
+            </template>
+        </google-map>
+        <!--
+
+        Vorerst rausgenommen wird fürs routing genutzt
+
+        <google-map-directions map="{{map}}"
+                               start-address="{{start}}"
+                               end-address="{{end}}"
+                               api-key="AIzaSyA5Z-Awweej__K-FumvWHMTG4w3C1RePhA"
+                               travel-mode="[[travelMode]]"></google-map-directions>
+        -->
+        <table>
+            <thead>
+            </thead>
+            <tbody>
+            <template is="dom-repeat" items="{{stations}}">
+                <tr>
+                    <td>{{item.station}}</td>
+                    <td>{{item.time}}</td>
+                    <td>
+                        <paper-button raised on-tap="openconn">Anschlüsse</paper-button>
+                    </td>
+                </tr>
+            </template>
+            </tbody>
+        </table>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: "bus-map",
+            listeners: {
+                'tap': "openconn"
+            },
+            properties: {
+                stations: {
+                    type: Array,
+                    value: [
+                        {
+                            station: {
+                                type: String,
+                                value: ""
+                            },
+                            time: {
+                                type: String,
+                                value: ""
+                            },
+                            lat: {
+                                type: String,
+                                value: ""
+                            },
+                            long: {
+                                type: String,
+                                value: ""
+                            },
+                            connections: {
+                                type: Array,
+                                value: [
+                                    {
+                                        line: {
+                                            type: String,
+                                            value: ""
+                                        },
+                                        time: {
+                                            type: String,
+                                            value: ""
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            /**
+             * Öffnet einen Dialog und überträg den erwünschten Haltestellenname und die entsprechenden
+             * Anschlüsse
+             * @param e das aktuelle event
+             */
+            openconn: function (e) {
+                var dialog = document.createElement('bus-connection-dialog');
+                var model = e.model;
+                dialog.setAttribute('title', model.get('item.station'));
+                var val = JSON.stringify(model.get('item.connections'));
+                dialog.setAttribute('conections', val);
+                console.log(val);
+                Polymer.dom(document.body).appendChild(dialog);
+                dialog.open();
+            }
+        })
+        ;
+
+    </script>
+</dom-module>

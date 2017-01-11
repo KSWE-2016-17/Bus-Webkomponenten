@@ -1,0 +1,105 @@
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<!--
+Öffnet einen Dialog mit den Anschlusshaltestellen.
+-->
+<dom-module id="bus-connection-dialog">
+
+    <template>
+        <paper-dialog id="dialog" opened="{{opened}}" modal>
+            <h2 hidden$="[[!title]]">[[title]]</h2>
+            <p>
+                <content>
+
+                    <table>
+
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>Line</th>
+                            <th>Uhrzeit</th>
+                        </tr>
+                        <template is="dom-repeat" items="{{conections}}">
+                            <tr>
+                                <td>{{item.line}}</td>
+                                <td>{{item.time}}</td>
+                            </tr>
+                        </template>
+                        </tbody>
+                    </table>
+
+                </content>
+            </p>
+            <div class="buttons">
+                <paper-button dismiss hidden$="[[!dismissButton]]" on-tap="_tapDismiss">[[dismissButton]]</paper-button>
+                <paper-button confirm autofocus on-tap="_tapConfirm">[[confirmButton]]</paper-button>
+            </div>
+        </paper-dialog>
+    </template>
+
+</dom-module>
+
+<script>
+    (function () {
+        PaperAlertDialog = Polymer({
+            is: 'bus-connection-dialog',
+            properties: {
+                title: {
+                    type: String,
+                    value: null
+                },
+                conections: {
+                    type: Array,
+                    value: [
+                        {
+                            line: {
+                                type: String,
+                                value: ""
+                            },
+                            time: {
+                                type: String,
+                                value: ""
+                            }
+                        }
+                    ]
+                },
+                confirmButton: {
+                    type: String,
+                    value: 'Confirm'
+                },
+                dismissButton: String,
+                opened: {
+                    true: Boolean,
+                    notify: true
+                }
+            },
+            /**
+             * öffnet den Dialog und hängt ihn in das Dokument
+             */
+            open: function () {
+
+                Polymer.dom(document.body).appendChild(this);
+                setTimeout(function () {
+                    this.$.dialog.open();
+                }.bind(this), 1);
+            },
+            /**
+             * Schließt und entfernt den Dialog
+             */
+            close: function () {
+                this.$.dialog.close();
+                Polymer.dom(this.parentNode).removeChild(this);
+            },
+            _tapDismiss: function () {
+                this.close();
+                this.fire('dismiss');
+            },
+            _tapConfirm: function () {
+                this.close();
+                this.fire('confirm');
+            }
+        });
+    })();
+</script>

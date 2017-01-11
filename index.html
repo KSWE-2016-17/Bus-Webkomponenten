@@ -5,12 +5,21 @@
     <title>bus-webkomponenten</title>
     <script type="text/javascript" src="bower_components/webcomponentsjs/webcomponents.js"></script>
     <link href="bower_components/polymer/polymer.html" rel="import">
-    <!-- Toolbar element -->
     <link href="bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+    <link href="project_components/bus-tickets.html" rel="import">
+    <link href="custom_components/link-button.html" rel="import">
+    <link href="custom_components/link-menu.html" rel="import">
+    <link href="project_components/bus-map.html" rel="import">
 </head>
+<!-- Startseite Ruft das Menü und die bus-map Komponente auf -->
 <body>
 <paper-toolbar>
-    <div class="title">My Toolbar</div>
+    <div class="title">Bus-Webkomponenten</div>
+    <link-menu menu_name="Menü" links='[{"name": "Linie wechseln", "link": ""}, {"name": "Fahrer wechseln", "link": ""}, {"name": "Einstellungen", "link": ""}, {"name": "Abmelden", "link": ""}]'></link-menu>
+    <bus-tickets url="tickets"></bus-tickets>
 </paper-toolbar>
+
+<bus-map stations='[{"station": "Minden ZOB", "time": "09:00 Uhr", "lat": "52.2868131", "long": "8.9174381", "connections": [{"line": "300", "time":"09:05"}, {"line": "400", "time":"09:15"}]}, {"station": "Minden Steinstraße", "time": "10:00 Uhr", "lat": "52.296205", "long": "8.912332", "connections": [{"line": "301", "time":"10:05"}, {"line": "408", "time":"10:15"}]}, {"station": "FH Bielefeld", "time": "11:00 Uhr","lat": "52.297545", "long": "8.904047", "connections": [{"line": "200", "time":"11:05"}, {"line": "415", "time":"11:15"}]}]'></bus-map>
+
 </body>
 </html>
